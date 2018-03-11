@@ -1,4 +1,4 @@
-package edu.jam.telephony.demo;
+package edu.jam.telephony;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,4 +9,5 @@ public class TelephonyApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TelephonyApplication.class, args);
 	}
+
 }

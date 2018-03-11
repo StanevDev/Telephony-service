@@ -1,4 +1,4 @@
-package edu.jam.telephony.demo;
+package edu.jam.telephony;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
