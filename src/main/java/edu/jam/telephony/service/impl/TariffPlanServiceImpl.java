@@ -12,8 +12,12 @@ import java.util.List;
 @Service
 public class TariffPlanServiceImpl implements TariffPlanService {
 
+    final TariffPlanDao dao;
+
     @Autowired
-    TariffPlanDao dao;
+    public TariffPlanServiceImpl(TariffPlanDao dao) {
+        this.dao = dao;
+    }
 
     @Override
     public void add(TariffPlan object) {

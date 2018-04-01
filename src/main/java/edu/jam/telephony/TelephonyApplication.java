@@ -8,7 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan({
                 "edu.jam.telephony.dao.impl",
-                "edu.jam.telephony.service.impl"})
+                "edu.jam.telephony.service.impl",
+				"edu.jam.telephony.controller"})
 public class TelephonyApplication {
 
 	public static void main(String[] args) {
