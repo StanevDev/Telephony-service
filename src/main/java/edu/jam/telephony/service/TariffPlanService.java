@@ -1,6 +1,6 @@
 package edu.jam.telephony.service;
 
-import edu.jam.telephony.model.TariffPlan;
+import edu.jam.telephony.model.entity.TariffPlan;
 
 import java.util.List;
 

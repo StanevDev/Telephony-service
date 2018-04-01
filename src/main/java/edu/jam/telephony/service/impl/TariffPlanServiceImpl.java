@@ -1,7 +1,7 @@
 package edu.jam.telephony.service.impl;
 
 import edu.jam.telephony.dao.TariffPlanDao;
-import edu.jam.telephony.model.TariffPlan;
+import edu.jam.telephony.model.entity.TariffPlan;
 import edu.jam.telephony.service.TariffPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

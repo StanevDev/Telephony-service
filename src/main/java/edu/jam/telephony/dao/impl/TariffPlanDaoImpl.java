@@ -1,7 +1,7 @@
 package edu.jam.telephony.dao.impl;
 
 import edu.jam.telephony.dao.TariffPlanDao;
-import edu.jam.telephony.model.TariffPlan;
+import edu.jam.telephony.model.entity.TariffPlan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;

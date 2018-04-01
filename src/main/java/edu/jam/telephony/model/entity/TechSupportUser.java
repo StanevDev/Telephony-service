@@ -1,4 +1,4 @@
-package edu.jam.telephony.model;
+package edu.jam.telephony.model.entity;
 
 
 public class TechSupportUser {
