@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>List of Users</title>
+    <link rel="stylesheet" href="css/table.css" type="text/css"/>
+</head>
+<body>
+<div class="table">
+    <table>
+        <tr>
+            <th>Tariff plan</th>
+            <th>Expires in</th>
+            <th>Region</th>
+            <th>Description</th>
+        </tr>
+        <tr th:each="tariff:${tariffs}">
+            <td th:text="${tariff.name}"/>
+            <td th:text="${tariff.expiresDate}"/>
+            <td th:text="${tariff.region}"/>
+            <td th:text="${tariff.description}"/>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
