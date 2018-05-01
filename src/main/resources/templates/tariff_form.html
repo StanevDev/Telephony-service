@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create plan</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<h1>Create new tariff plan</h1>
+
+<form action="#"
+      th:action="@{/tariffs/add}"
+      th:object="${tariff}"
+      method="post">
+
+    <p>Name: <input type="text" th:field="*{name}"/></p>
+
+    <p>Price: <input type="number" th:field="*{price}"/></p>
+
+    <p>Expires date: <input type="date" th:field="*{expiresDate}"/></p>
+
+    <p>Region: <input type="text" th:field="*{region}"></p>
+
+    <p>Select service:</p>
+
+    <ul th:each="service : ${services}">
+        <input type="checkbox" th:value="${service}"/>
+        <label th:text="${service}"></label>
+    </ul>
+
+    <p>Tariff plan description: <textarea th:field="*{description}"></textarea></p>
+
+    <p>
+        <input type="submit" value="Submit"/>
+        <input type="reset" value="Reset"/>
+    </p>
+
+</form>
+</body>
+</html>
