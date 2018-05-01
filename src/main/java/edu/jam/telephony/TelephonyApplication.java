@@ -6,10 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({
-                "edu.jam.telephony.dao.impl",
-                "edu.jam.telephony.service.impl",
-				"edu.jam.telephony.controller"})
+@ComponentScan(basePackages = "edu.jam.telephony")
 public class TelephonyApplication {
 
 	public static void main(String[] args) {

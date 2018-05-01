@@ -1,5 +1,6 @@
 table {
-    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    align-content: center;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif, serif;
     text-align: center;
     border-collapse: collapse;
     border-spacing: 5px;
@@ -11,12 +12,8 @@ th {
     font-size: 22px;
     font-weight: 300;
     padding: 12px 10px;
-    border-bottom: 2px solid #F56433;
-    color: #F56433;
-}
-
-tbody tr:nth-child(2) {
-    border-bottom: 2px solid #F56433;
+    border-bottom: 2px solid rgb(215, 77, 96);
+    color: #d74d60;
 }
 
 td {
