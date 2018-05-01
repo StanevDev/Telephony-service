@@ -1,18 +1,22 @@
 package edu.jam.telephony.model.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 
-public class TariffPlan implements Serializable{
+public class TariffPlan implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private int         id;
     private BigDecimal  price;
-    private Date        expiresDate;
     private String      region;
     private String      name;
     private String      description;
+    @DateTimeFormat(pattern="dd-MM-YYYY")
+    private Date        expiresDate;
 
     public TariffPlan() {}
 
@@ -72,5 +76,14 @@ public class TariffPlan implements Serializable{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public static class Form extends TariffPlan {
+
+        List<String> services;
+
+        public List<String> getServices() {
+            return services;
+        }
     }
 }

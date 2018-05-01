@@ -1,6 +1,6 @@
 package edu.jam.telephony.dao.impl;
 
-import edu.jam.telephony.dao.TariffPlanDao;
+import edu.jam.telephony.dao.IRepository;
 import edu.jam.telephony.model.entity.TariffPlan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,11 +20,14 @@ import java.util.List;
 
 
 @Repository
-public class TariffPlanDaoImpl extends JdbcDaoSupport implements TariffPlanDao {
+public class TariffPlanDao extends JdbcDaoSupport implements IRepository<TariffPlan> {
+
+    final private DataSource dataSource;
 
     @Autowired
-    @Qualifier("dataSource")
-    DataSource dataSource;
+    public TariffPlanDao(@Qualifier("dataSource") DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @PostConstruct
     private void initialize(){
@@ -57,7 +61,8 @@ public class TariffPlanDaoImpl extends JdbcDaoSupport implements TariffPlanDao {
                 TariffPlan tp = tariffPlans.get(0);
 
                 ps.setBigDecimal(1, tp.getPrice());
-                ps.setDate(2, tp.getExpiresDate());
+                ps.setDate(2, new Date
+                        (tp.getExpiresDate().getTime()));
                 ps.setString(3, tp.getRegion());
                 ps.setString(4, tp.getName());
                 ps.setString(5, tp.getDescription());
