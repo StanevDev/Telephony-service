@@ -58,7 +58,7 @@ public class TariffPlanDao extends JdbcDaoSupport implements IRepository<TariffP
         final BatchPreparedStatementSetter setter = new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
-                TariffPlan tp = tariffPlans.get(0);
+                TariffPlan tp = tariffPlans.get(i);
 
                 ps.setBigDecimal(1, tp.getPrice());
                 ps.setDate(2, new Date
@@ -74,7 +74,7 @@ public class TariffPlanDao extends JdbcDaoSupport implements IRepository<TariffP
             }
         };
 
-        getJdbcTemplate().update(sql, setter);
+        getJdbcTemplate().batchUpdate(sql, setter);
     }
 
     @Override

@@ -4,16 +4,19 @@ import edu.jam.telephony.dao.IRepository;
 import edu.jam.telephony.model.entity.Service;
 import edu.jam.telephony.model.entity.ServiceType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Repository
 public class ServiceDao extends JdbcDaoSupport implements IRepository<Service> {
@@ -46,8 +49,28 @@ public class ServiceDao extends JdbcDaoSupport implements IRepository<Service> {
     }
 
     @Override
-    public void addAll(List<Service> objects) {
-        throw new NotImplementedException();
+    public void addAll(List<Service> services) {
+        final String sql = "INSERT INTO service " +
+                "(price, tarification_value, service_type, service_name) " +
+                "VALUES (?,?,?,?)";
+
+        final var batchUpdate = new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                var service = services.get(i);
+                ps.setBigDecimal(1, service.getPrice());
+                ps.setInt(2, service.getTarificationValue());
+                ps.setString(3, service.getServiceType().name());
+                ps.setString(4, service.getServiceName());
+            }
+
+            @Override
+            public int getBatchSize() {
+                return services.size();
+            }
+        };
+
+        getJdbcTemplate().batchUpdate(sql, batchUpdate);
     }
 
     @Override

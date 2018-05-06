@@ -22,10 +22,10 @@
 
     <p>Select service:</p>
 
-    <ul th:each="service : ${services}">
+    <p th:each="service : ${services}">
         <input type="checkbox" th:value="${service}"/>
         <label th:text="${service}"></label>
-    </ul>
+    </p>
 
     <p>Tariff plan description: <textarea th:field="*{description}"></textarea></p>
 
