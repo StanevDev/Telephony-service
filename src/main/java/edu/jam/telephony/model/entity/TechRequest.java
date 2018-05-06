@@ -3,21 +3,31 @@ package edu.jam.telephony.model.entity;
 
 public class TechRequest {
 
-  private long techRequest;
+  private int id;
   private String problemDescription;
-  private long dateId;
-  private long subscriberId;
-  private long techSupportUserId;
+  private int dateId;
+  private int subscriberId;
+  private int techSupportUserId;
 
-
-  public long getTechRequest() {
-    return techRequest;
+  public TechRequest() {
   }
 
-  public void setTechRequest(long techRequest) {
-    this.techRequest = techRequest;
+  public TechRequest(int id, String problemDescription, int dateId, int subscriberId, int techSupportUserId) {
+
+    this.id = id;
+    this.problemDescription = problemDescription;
+    this.dateId = dateId;
+    this.subscriberId = subscriberId;
+    this.techSupportUserId = techSupportUserId;
   }
 
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
 
   public String getProblemDescription() {
     return problemDescription;
@@ -28,29 +38,29 @@ public class TechRequest {
   }
 
 
-  public long getDateId() {
+  public int getDateId() {
     return dateId;
   }
 
-  public void setDateId(long dateId) {
+  public void setDateId(int dateId) {
     this.dateId = dateId;
   }
 
 
-  public long getSubscriberId() {
+  public int getSubscriberId() {
     return subscriberId;
   }
 
-  public void setSubscriberId(long subscriberId) {
+  public void setSubscriberId(int subscriberId) {
     this.subscriberId = subscriberId;
   }
 
 
-  public long getTechSupportUserId() {
+  public int getTechSupportUserId() {
     return techSupportUserId;
   }
 
-  public void setTechSupportUserId(long techSupportUserId) {
+  public void setTechSupportUserId(int techSupportUserId) {
     this.techSupportUserId = techSupportUserId;
   }
 
