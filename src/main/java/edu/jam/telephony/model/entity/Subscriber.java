@@ -1,12 +1,13 @@
 package edu.jam.telephony.model.entity;
 
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 public class Subscriber {
 
   private long subscriberId;
-  private String balance;
+  private BigDecimal balance;
   private java.sql.Date registrationDate;
   private long tariffPlanId;
   private long phoneNumber;
@@ -16,10 +17,10 @@ public class Subscriber {
 
   public Subscriber() { }
 
-  public Subscriber(long subscriberId,
-                    String balance,
+  public Subscriber(int subscriberId,
+                    BigDecimal balance,
                     Date registrationDate,
-                    long tariffPlanId,
+                    int tariffPlanId,
                     long phoneNumber,
                     boolean readyToBlock,
                     boolean isInRoaming,
@@ -43,11 +44,11 @@ public class Subscriber {
   }
 
 
-  public String getBalance() {
+  public BigDecimal getBalance() {
     return balance;
   }
 
-  public void setBalance(String balance) {
+  public void setBalance(BigDecimal balance) {
     this.balance = balance;
   }
 
@@ -61,7 +62,7 @@ public class Subscriber {
   }
 
 
-  public long getTariffPlanId() {
+  public int getTariffPlanId() {
     return tariffPlanId;
   }
 
