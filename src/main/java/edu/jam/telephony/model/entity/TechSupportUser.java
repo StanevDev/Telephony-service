@@ -3,12 +3,12 @@ package edu.jam.telephony.model.entity;
 
 public class TechSupportUser {
 
-  private long techSupportUserId;
+  private int techSupportUserId;
   private String firstName;
   private String lastName;
   private long phoneNumber;
 
-  public TechSupportUser(long techSupportUserId, String firstName, String lastName, long phoneNumber) {
+  public TechSupportUser(int techSupportUserId, String firstName, String lastName, long phoneNumber) {
     this.techSupportUserId = techSupportUserId;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -19,11 +19,11 @@ public class TechSupportUser {
 
   }
 
-  public long getTechSupportUserId() {
+  public int getTechSupportUserId() {
     return techSupportUserId;
   }
 
-  public void setTechSupportUserId(long techSupportUserId) {
+  public void setTechSupportUserId(int techSupportUserId) {
     this.techSupportUserId = techSupportUserId;
   }
 

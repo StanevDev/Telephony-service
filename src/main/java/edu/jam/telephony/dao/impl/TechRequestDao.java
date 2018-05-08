@@ -93,10 +93,30 @@ public class TechRequestDao extends JdbcDaoSupport implements IRepository<TechRe
         return getJdbcTemplate().queryForObject(sql, Integer.class);
     }
 
+    public List<TechRequest> getBySupportUserId(int id){
+        final String sql = "SELECT * FROM tech_request WHERE tech_support_user_id = ?";
+
+        return getJdbcTemplate()
+                .query(sql,
+                        new Object[]{id},
+                        requestMapper);
+    }
+
+    public int getRequestsCountBySupportUserId(int userId){
+        final  String sql = "SELECT COUNT(*) FROM tech_request WHERE tech_support_user_id = ?";
+
+        return getJdbcTemplate()
+                .queryForObject(
+                        sql,
+                        new Object[]{userId},
+                        Integer.class
+                );
+    }
+
 
     private RowMapper<TechRequest> requestMapper = (rs, rowNum) -> new TechRequest(
-            rs.getInt("tech_request_id"),
-            rs.getString("getProblemDescription"),
+            rs.getInt("tech_reqeust_id"),
+            rs.getString("problem_description"),
             rs.getInt("date_id"),
             rs.getInt("subscriber_id"),
             rs.getInt("tech_support_user_id")

@@ -12,11 +12,13 @@
         <tr>
             <th>Name</th>
             <th>Phone number</th>
+            <th>Requests in processing</th>
         </tr>
         <!--/*@thymesVar id="users" type="java.util.List<edu.jam.telephony.model.entity.TechSupportUser>"*/-->
-        <tr th:each="user:${users}">
+        <tr th:each="user, userStat :${users}">
             <td th:text="${user.getFirstName() + ' ' + user.getLastName()}"></td>
             <td th:text="${user.getPhoneNumber()}"></td>
+            <td th:text="${counts.get(userStat.index)}"></td>
         </tr>
     </table>
 </div>
