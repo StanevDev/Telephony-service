@@ -8,6 +8,16 @@ public class TechSupportUser {
   private String lastName;
   private long phoneNumber;
 
+  public TechSupportUser(long techSupportUserId, String firstName, String lastName, long phoneNumber) {
+    this.techSupportUserId = techSupportUserId;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.phoneNumber = phoneNumber;
+  }
+
+  public TechSupportUser() {
+
+  }
 
   public long getTechSupportUserId() {
     return techSupportUserId;

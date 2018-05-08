@@ -6,10 +6,10 @@ import java.sql.Date;
 
 public class Subscriber {
 
-  private long subscriberId;
+  private int subscriberId;
   private BigDecimal balance;
   private java.sql.Date registrationDate;
-  private long tariffPlanId;
+  private int tariffPlanId;
   private long phoneNumber;
   private boolean readyToBlock;
   private boolean isInRoaming;
@@ -39,7 +39,7 @@ public class Subscriber {
     return subscriberId;
   }
 
-  public void setSubscriberId(long subscriberId) {
+  public void setSubscriberId(int subscriberId) {
     this.subscriberId = subscriberId;
   }
 
@@ -66,7 +66,7 @@ public class Subscriber {
     return tariffPlanId;
   }
 
-  public void setTariffPlanId(long tariffPlanId) {
+  public void setTariffPlanId(int tariffPlanId) {
     this.tariffPlanId = tariffPlanId;
   }
 

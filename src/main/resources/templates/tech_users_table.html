@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/table.css" th:href="@{/css/table.css}" type="text/css"/>
+</head>
+<body>
+
+<div class="table">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Phone number</th>
+        </tr>
+        <!--/*@thymesVar id="users" type="java.util.List<edu.jam.telephony.model.entity.TechSupportUser>"*/-->
+        <tr th:each="user:${users}">
+            <td th:text="${user.getFirstName() + ' ' + user.getLastName()}"></td>
+            <td th:text="${user.getPhoneNumber()}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
