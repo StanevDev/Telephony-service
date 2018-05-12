@@ -37,4 +37,8 @@ public class TechUserServiceImpl {
 
         return counts;
     }
+
+    public void addTechUser(TechSupportUser user){
+        techUserDao.add(user);
+    }
 }
