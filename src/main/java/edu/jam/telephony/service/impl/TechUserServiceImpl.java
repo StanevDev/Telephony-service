@@ -1,7 +1,7 @@
 package edu.jam.telephony.service.impl;
 
-import edu.jam.telephony.dao.impl.TechRequestDao;
-import edu.jam.telephony.dao.impl.TechSupportUserDao;
+import edu.jam.telephony.dao.TechRequestDao;
+import edu.jam.telephony.dao.TechSupportUserDao;
 import edu.jam.telephony.model.entity.TechSupportUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

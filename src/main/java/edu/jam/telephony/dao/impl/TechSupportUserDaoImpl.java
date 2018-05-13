@@ -1,7 +1,5 @@
 package edu.jam.telephony.dao.impl;
 
-import edu.jam.telephony.dao.IRepository;
-import edu.jam.telephony.model.entity.TariffPlan;
 import edu.jam.telephony.model.entity.TechSupportUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -18,12 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class TechSupportUserDao extends JdbcDaoSupport implements IRepository<TechSupportUser> {
+public class TechSupportUserDaoImpl extends JdbcDaoSupport implements edu.jam.telephony.dao.TechSupportUserDao {
 
     final DataSource dataSource;
 
     @Autowired
-    public TechSupportUserDao(DataSource dataSource) {
+    public TechSupportUserDaoImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

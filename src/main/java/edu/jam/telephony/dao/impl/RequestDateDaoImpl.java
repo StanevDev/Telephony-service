@@ -1,6 +1,6 @@
 package edu.jam.telephony.dao.impl;
 
-import edu.jam.telephony.dao.IRepository;
+import edu.jam.telephony.dao.RequestDateDao;
 import edu.jam.telephony.model.entity.RequestDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -18,12 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class RequestDateDao extends JdbcDaoSupport implements IRepository<RequestDate> {
+public class RequestDateDaoImpl extends JdbcDaoSupport implements RequestDateDao {
 
     final DataSource dataSource;
 
     @Autowired
-    public RequestDateDao(DataSource dataSource) {
+    public RequestDateDaoImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -31,7 +31,6 @@ public class RequestDateDao extends JdbcDaoSupport implements IRepository<Reques
     public void initialize (){
         setDataSource(dataSource);
     }
-
 
     @Override
     public void add(RequestDate date) {

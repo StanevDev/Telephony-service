@@ -1,6 +1,5 @@
 package edu.jam.telephony.dao.impl;
 
-import edu.jam.telephony.dao.IRepository;
 import edu.jam.telephony.model.entity.TechRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -12,18 +11,17 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class TechRequestDao extends JdbcDaoSupport implements IRepository<TechRequest> {
+public class TechRequestDaoImpl extends JdbcDaoSupport implements edu.jam.telephony.dao.TechRequestDao {
 
     private final DataSource dataSource;
 
     @Autowired
-    public TechRequestDao(DataSource dataSource) {
+    public TechRequestDaoImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -93,6 +91,7 @@ public class TechRequestDao extends JdbcDaoSupport implements IRepository<TechRe
         return getJdbcTemplate().queryForObject(sql, Integer.class);
     }
 
+    @Override
     public List<TechRequest> getBySupportUserId(int id){
         final String sql = "SELECT * FROM tech_request WHERE tech_support_user_id = ?";
 
@@ -102,6 +101,7 @@ public class TechRequestDao extends JdbcDaoSupport implements IRepository<TechRe
                         requestMapper);
     }
 
+    @Override
     public int getRequestsCountBySupportUserId(int userId){
         final  String sql = "SELECT COUNT(*) FROM tech_request WHERE tech_support_user_id = ?";
 

@@ -1,6 +1,6 @@
 package edu.jam.telephony.dao.impl;
 
-import edu.jam.telephony.dao.IRepository;
+import edu.jam.telephony.dao.TariffPlanDao;
 import edu.jam.telephony.model.entity.TariffPlan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,12 +20,12 @@ import java.util.List;
 
 
 @Repository
-public class TariffPlanDao extends JdbcDaoSupport implements IRepository<TariffPlan> {
+public class TariffPlanDaoImpl extends JdbcDaoSupport implements TariffPlanDao {
 
     final private DataSource dataSource;
 
     @Autowired
-    public TariffPlanDao(@Qualifier("dataSource") DataSource dataSource) {
+    public TariffPlanDaoImpl(@Qualifier("dataSource") DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -34,7 +34,6 @@ public class TariffPlanDao extends JdbcDaoSupport implements IRepository<TariffP
         setDataSource(dataSource);
     }
 
-    @Override
     public void add(TariffPlan tariffPlan) {
         final String sql = "INSERT INTO tariff_plan " +
                 "(price, expires_date, region, tariff_name, tariff_description) " +
@@ -49,7 +48,6 @@ public class TariffPlanDao extends JdbcDaoSupport implements IRepository<TariffP
                 tariffPlan.getDescription());
     }
 
-    @Override
     public void addAll(List<TariffPlan> tariffPlans) {
         final String sql = "INSERT INTO tariff_plan " +
                 "(price, expires_date, region, tariff_name, tariff_description) " +
@@ -77,7 +75,6 @@ public class TariffPlanDao extends JdbcDaoSupport implements IRepository<TariffP
         getJdbcTemplate().batchUpdate(sql, setter);
     }
 
-    @Override
     public TariffPlan get(int id) {
         String sql = "SELECT * FROM tariff_plan WHERE tariff_plan_id = ?";
 
@@ -87,13 +84,11 @@ public class TariffPlanDao extends JdbcDaoSupport implements IRepository<TariffP
                 tariffPlanRowMapper);
     }
 
-    @Override
     public List<TariffPlan> getAll() {
         final String sql = "SELECT * FROM tariff_plan";
         return getJdbcTemplate().query(sql, tariffExtractor);
     }
 
-    @Override
     public int getCount() {
         final String sql = "SELECT COUNT(*) FROM tariff_plan";
         return getJdbcTemplate().queryForObject(sql, Integer.class);

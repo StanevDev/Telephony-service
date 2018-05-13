@@ -1,6 +1,6 @@
 package edu.jam.telephony;
 
-import edu.jam.telephony.dao.impl.ServiceDao;
+import edu.jam.telephony.dao.ServiceDao;
 import edu.jam.telephony.model.entity.Service;
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 package edu.jam.telephony.dao.impl;
 
-import edu.jam.telephony.dao.IRepository;
+import edu.jam.telephony.dao.ServiceDao;
 import edu.jam.telephony.model.entity.Service;
 import edu.jam.telephony.model.entity.ServiceType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,12 @@ import java.util.List;
 
 
 @Repository
-public class ServiceDao extends JdbcDaoSupport implements IRepository<Service> {
+public class ServiceDaoImpl extends JdbcDaoSupport implements ServiceDao {
 
     private final DataSource dataSource;
 
     @Autowired
-    public ServiceDao(DataSource db) {
+    public ServiceDaoImpl(DataSource db) {
         this.dataSource = db;
     }
 
@@ -79,6 +79,7 @@ public class ServiceDao extends JdbcDaoSupport implements IRepository<Service> {
         return getJdbcTemplate().queryForObject(sql, serviceRowMapper);
     }
 
+    @Override
     public List<Service> getBySubscriber(int userId){
         final String sql = "SELECT * FROM service s WHERE s.service_id in ( " +
                 "SELECT sms.service_id from service_mm_subscriber sms WHERE sms.subscriber_id = " + userId+ ")";

@@ -1,6 +1,6 @@
 package edu.jam.telephony;
 
-import edu.jam.telephony.dao.impl.TariffPlanDao;
+import edu.jam.telephony.dao.impl.TariffPlanDaoImpl;
 import edu.jam.telephony.model.entity.TariffPlan;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import java.util.Date;
 public class TariffPlanDaoTest extends Assert {
 
     @Autowired
-    TariffPlanDao dao;
+    TariffPlanDaoImpl dao;
 
     @Test
     public void getCount() {
