@@ -79,6 +79,15 @@ public class ServiceDao extends JdbcDaoSupport implements IRepository<Service> {
         return getJdbcTemplate().queryForObject(sql, serviceRowMapper);
     }
 
+    public List<Service> getBySubscriber(int userId){
+        final String sql = "SELECT * FROM service s WHERE s.service_id in ( " +
+                "SELECT sms.service_id from service_mm_subscriber sms WHERE sms.subscriber_id = " + userId+ ")";
+
+        return getJdbcTemplate().query(
+                sql,
+                serviceExtractor);
+    }
+
     @Override
     public List<Service> getAll() {
         final String sql = "SELECT * FROM service";
@@ -96,7 +105,7 @@ public class ServiceDao extends JdbcDaoSupport implements IRepository<Service> {
                     rs.getInt("service_id"),
                     rs.getBigDecimal("price"),
                     rs.getInt("tarification_value"),
-                    (ServiceType) rs.getObject("service_type"),
+                    ServiceType.parse(rs.getString("service_type")),
                     rs.getString("service_name")
             );
 
