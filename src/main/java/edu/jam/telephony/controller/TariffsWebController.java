@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class TariffsWebController {
     }
 
     @GetMapping ("/add")
-    public String tariffForm(Model model){
+    public String tariffForm(HttpSession session, Model model){
         model.addAttribute("tariff", new TariffPlan());
         model.addAttribute("services", services);
         return "tariff_form";
