@@ -103,6 +103,18 @@ public class SubscriberDaoImpl extends JdbcDaoSupport implements SubscriberDao {
         return getJdbcTemplate().queryForObject(sql, Integer.class);
     }
 
+    @Override
+    public Subscriber getByEmail(String email) {
+        final String sql = "SELECT * FROM subscriber WHERE email = ?";
+
+        return getJdbcTemplate()
+                .queryForObject(
+                        sql,
+                        new Object[]{email},
+                        subscriberRowMapper
+                );
+    }
+
     private RowMapper<Subscriber> subscriberRowMapper = (rs, rowNum) -> new Subscriber(
             rs.getInt("subscriber_id"),
             rs.getBigDecimal("balance"),

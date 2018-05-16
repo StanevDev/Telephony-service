@@ -14,4 +14,6 @@ public interface SubscriberDao {
     List<Subscriber> getAll();
 
     int getCount();
+
+    Subscriber getByEmail(String email);
 }
