@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -33,20 +34,21 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .anyRequest().authenticated()
-//                    .and()
-//                .formLogin()
-//                    .loginPage("/login")
-//                    .permitAll()
-//                    .and()
-//                .logout()
-//                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                    .logoutSuccessUrl("/login?logout")
-//                    .permitAll();
-//    }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .anyRequest().authenticated()
+                    .and()
+                .formLogin()
+                    .loginPage("/login")
+                    .permitAll()
+                    .and()
+                .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/login?logout=true")
+                    .permitAll()
+        .and().csrf().disable();
+    }
 
     @Configuration
     @Order(1)
@@ -55,14 +57,11 @@ public class AppSecurityConfiguration extends WebSecurityConfigurerAdapter {
         BasicAuthenticationPoint point;
 
         protected void configure(HttpSecurity http) throws Exception {
-//            http
-//                    .antMatcher("/api/**")
-//                    .authorizeRequests().anyRequest().authenticated()
-//                    .and()
-//                    .httpBasic();
             http.csrf().disable();
-            http.authorizeRequests().antMatchers("/", "/api/**").permitAll()
-                    .anyRequest().authenticated();
+            http.antMatcher("/api/**")
+                    .authorizeRequests()
+                    .anyRequest()
+                    .authenticated();
             http.httpBasic().authenticationEntryPoint(point);
         }
     }
