@@ -98,6 +98,15 @@ public class SubscriberDaoImpl extends JdbcDaoSupport implements SubscriberDao {
     }
 
     @Override
+    public void updateTariffPlan(Subscriber subscriber, int planId) {
+        String sql = "UPDATE subscriber SET tariff_plan_id = ? WHERE subscriber_id = ?";
+
+        getJdbcTemplate().update(
+                sql,
+                planId, subscriber.getSubscriberId());
+    }
+
+    @Override
     public int getCount() {
         final String sql = "SELECT COUNT (*) FROM subscriber";
         return getJdbcTemplate().queryForObject(sql, Integer.class);

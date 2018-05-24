@@ -1,6 +1,7 @@
 package edu.jam.telephony.service.impl;
 
 import edu.jam.telephony.dao.TariffPlanDao;
+import edu.jam.telephony.dao.impl.TariffPlanDaoImpl;
 import edu.jam.telephony.model.entity.TariffPlan;
 import edu.jam.telephony.service.TariffPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,10 @@ import java.util.List;
 @Service
 public class TariffPlanServiceImpl implements TariffPlanService {
 
-    final TariffPlanDao dao;
+    final TariffPlanDaoImpl dao;
 
     @Autowired
-    public TariffPlanServiceImpl(TariffPlanDao dao) {
+    public TariffPlanServiceImpl(TariffPlanDaoImpl dao) {
         this.dao = dao;
     }
 
@@ -31,12 +32,12 @@ public class TariffPlanServiceImpl implements TariffPlanService {
 
     @Override
     public TariffPlan get(int id) {
-        return null;
+        return dao.get(id);
     }
 
     @Override
     public List<TariffPlan> getAll() {
-        return null;
+        return dao.getAll();
     }
 
     @Override

@@ -13,6 +13,8 @@ public interface SubscriberDao {
 
     List<Subscriber> getAll();
 
+    void updateTariffPlan(Subscriber subscriber, int planId);
+
     int getCount();
 
     Subscriber getByEmail(String email);
