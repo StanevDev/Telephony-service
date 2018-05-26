@@ -13,6 +13,10 @@ public interface ServiceDao {
 
     List<Service> getBySubscriber(int userId);
 
+    void addToSubscriber(int serviceId, int subscriberId);
+
+    void removeServiceFromSubscriber(int serviceId, int subscriberId);
+
     List<Service> getAll();
 
     int getCount();

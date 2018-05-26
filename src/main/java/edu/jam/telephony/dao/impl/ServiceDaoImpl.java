@@ -76,7 +76,7 @@ public class ServiceDaoImpl extends JdbcDaoSupport implements ServiceDao {
     @Override
     public Service get(int id) {
         String sql = "SELECT * FROM service WHERE service_id = ?";
-        return getJdbcTemplate().queryForObject(sql, serviceRowMapper);
+        return getJdbcTemplate().queryForObject(sql, serviceRowMapper, id);
     }
 
     @Override
@@ -87,6 +87,26 @@ public class ServiceDaoImpl extends JdbcDaoSupport implements ServiceDao {
         return getJdbcTemplate().query(
                 sql,
                 serviceExtractor);
+    }
+
+    @Override
+    public void addToSubscriber(int serviceId, int subscriberId) {
+        final String sql = "INSERT INTO service_mm_subscriber " +
+                "(service_id, subscriber_id) " +
+                "VALUES (?,?)";
+
+        getJdbcTemplate().update(
+                sql,
+                serviceId,
+                subscriberId
+        );
+    }
+
+    @Override
+    public void removeServiceFromSubscriber(int serviceId, int subscriberId) {
+        final String sql = "DELETE FROM service_mm_subscriber sms WHERE sms.service_id = ? AND sms.subscriber_id = ?";
+
+        getJdbcTemplate().update(sql, serviceId, subscriberId);
     }
 
     @Override

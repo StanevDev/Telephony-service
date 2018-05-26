@@ -5,10 +5,7 @@ import edu.jam.telephony.model.entity.ServiceType;
 import edu.jam.telephony.service.impl.ServiceService;
 import edu.jam.telephony.service.impl.SubscriberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.security.Principal;
@@ -37,5 +34,27 @@ public class ServiceController {
 
         return serviceService.getServicesBySubscriber(sub);
     }
+
+    @PostMapping("connect/{id}")
+    @ResponseBody
+    Service connectService(@PathVariable Integer id, Principal principal){
+        var sub = subService.fromPrincipal(principal);
+        var service = serviceService.get(id);
+        if (service == null) return null;
+
+        serviceService.addServiceToSubscriber(id, sub);
+        return service;
+    }
+
+    @PostMapping("disconnect/{id}")
+    Service disconnect(@PathVariable Integer id, Principal principal){
+        var sub = subService.fromPrincipal(principal);
+        var service = serviceService.get(id);
+        if (service == null) return null;
+
+        serviceService.removeServiceFromSubscriber(id, sub);
+        return service;
+    }
+
 
 }
