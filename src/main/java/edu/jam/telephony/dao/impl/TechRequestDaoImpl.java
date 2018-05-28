@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -32,21 +33,23 @@ public class TechRequestDaoImpl extends JdbcDaoSupport implements edu.jam.teleph
 
     @Override
     public void add(TechRequest request) {
+        final String sqlRequestDate = "INSERT INTO tech_request_date (request_date) VALUES (?)";
+
         final String sql = "INSERT INTO tech_request " +
-                "(problem_description, date_id, subscriber_id, tech_support_user_id) " +
+                "(problem_description, subscriber_id, tech_support_user_id, date) " +
                 "VALUES (?,?,?,?)";
 
         getJdbcTemplate().update(sql,
                 request.getProblemDescription(),
-                request.getDateId(),
                 request.getSubscriberId(),
-                request.getTechSupportUserId());
+                request.getTechSupportUserId(),
+                new java.sql.Date(request.getDate().getTime()));
     }
 
     @Override
     public void addAll(List<TechRequest> requests) {
         final String sql = "INSERT INTO tech_request " +
-                "(problem_description, date_id, subscriber_id, tech_support_user_id) " +
+                "(problem_description, subscriber_id, tech_support_user_id) " +
                 "VALUES (?,?,?,?)";
 
         final var batchUpdate = new BatchPreparedStatementSetter() {
@@ -55,7 +58,6 @@ public class TechRequestDaoImpl extends JdbcDaoSupport implements edu.jam.teleph
                 var request = requests.get(i);
 
                 ps.setString(1, request.getProblemDescription());
-                ps.setInt(2, request.getDateId());
                 ps.setInt(3, request.getSubscriberId());
                 ps.setInt(4, request.getTechSupportUserId());
             }
@@ -102,6 +104,16 @@ public class TechRequestDaoImpl extends JdbcDaoSupport implements edu.jam.teleph
     }
 
     @Override
+    public List<TechRequest> getBySubscriberId(int id) {
+        final String sql = "SELECT * FROM tech_request WHERE subscriber_id = ?";
+
+        return getJdbcTemplate().query(
+                sql,
+                requestExtractor,
+                id);
+    }
+
+    @Override
     public int getRequestsCountBySupportUserId(int userId){
         final  String sql = "SELECT COUNT(*) FROM tech_request WHERE tech_support_user_id = ?";
 
@@ -113,13 +125,12 @@ public class TechRequestDaoImpl extends JdbcDaoSupport implements edu.jam.teleph
                 );
     }
 
-
     private RowMapper<TechRequest> requestMapper = (rs, rowNum) -> new TechRequest(
             rs.getInt("tech_reqeust_id"),
             rs.getString("problem_description"),
-            rs.getInt("date_id"),
             rs.getInt("subscriber_id"),
-            rs.getInt("tech_support_user_id")
+            rs.getInt("tech_support_user_id"),
+            new Date(rs.getDate("date").getTime())
     );
 
     private ResultSetExtractor<List<TechRequest>> requestExtractor = rs -> {

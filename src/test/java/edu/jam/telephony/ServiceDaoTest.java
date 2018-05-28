@@ -1,6 +1,7 @@
 package edu.jam.telephony;
 
 import edu.jam.telephony.dao.ServiceDao;
+import edu.jam.telephony.dao.TechRequestDao;
 import edu.jam.telephony.model.entity.Service;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -17,6 +19,9 @@ public class ServiceDaoTest extends Assert {
 
     @Autowired
     ServiceDao dao;
+
+    @Autowired
+    TechRequestDao dao2;
 
     @Test
     public void getBySubId() {
@@ -32,5 +37,4 @@ public class ServiceDaoTest extends Assert {
         List<Service> services = dao.getAll();
         assertNotNull(services);
     }
-
 }

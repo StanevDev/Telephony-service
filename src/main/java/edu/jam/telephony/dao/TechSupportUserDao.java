@@ -14,4 +14,6 @@ public interface TechSupportUserDao {
     List<TechSupportUser> getAll();
 
     int getCount();
+
+    int getUserIdWithMinRequests();
 }

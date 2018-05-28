@@ -5,7 +5,6 @@ import edu.jam.telephony.model.entity.Subscriber;
 import edu.jam.telephony.model.entity.TariffPlan;
 import edu.jam.telephony.service.TariffPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;

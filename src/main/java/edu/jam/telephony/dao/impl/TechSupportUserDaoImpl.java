@@ -92,6 +92,14 @@ public class TechSupportUserDaoImpl extends JdbcDaoSupport implements edu.jam.te
         return getJdbcTemplate().queryForObject(sql, Integer.class);
     }
 
+    @Override
+    public int getUserIdWithMinRequests() {
+        String sql = "SELECT tech_support_user_id from supportUserWithMinRequests";
+
+        return getJdbcTemplate()
+                .queryForObject(sql, Integer.class);
+    }
+
     private RowMapper<TechSupportUser> supportUserRowMapper = (rs, rowNum) -> new TechSupportUser(
             rs.getInt("tech_support_user_id"),
             rs.getString("first_name"),

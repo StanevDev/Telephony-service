@@ -2,6 +2,7 @@ package edu.jam.telephony.dao;
 
 import edu.jam.telephony.model.entity.TechRequest;
 
+import java.util.Date;
 import java.util.List;
 
 public interface TechRequestDao {
@@ -17,5 +18,8 @@ public interface TechRequestDao {
 
     List<TechRequest> getBySupportUserId(int id);
 
+    List<TechRequest> getBySubscriberId(int id);
+
     int getRequestsCountBySupportUserId(int userId);
+
 }
